@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+}
+
+ul {
+  padding-left: 12px;
+}
+
+.options {
+  font-family: 'Helvetica', sans-serif;
+  border-left: 4px solid #9013FE;
+  padding: 8px;
+}
+
+.options > div {
+  margin-bottom: 12px;
+}
+
+label {
+  margin-right: 12px;
+}
+
+input[type=number] {
+  width: 36px;
+}
+
+.combat {
+  display: flex;
+}
+
+@media screen and (max-width: 399px) {
+  section {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 400px) {
+  section {
+    flex: 1;
+    margin-left: 20px;
+  }
+}
