@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './app';
-import './style.css';
+import './style.scss';
+import { version } from '../package.json';
 
 class Container extends React.Component {
   constructor(props) {
@@ -18,15 +19,16 @@ class Container extends React.Component {
   render() {
     return <App
       model={this.state}
-      onRageChange={ (e) => this.onChange(e, 'raging') }
-      onRecklessChange={ (e) => this.onChange(e, 'reckless') }
-      onLevelChange={ (e) => this.onChange(e, 'level') }
-      onGWMChange={ (e) => this.onChange(e, 'gwm') } />;
+      onRageChange={ (v) => this.onChange(v, 'raging') }
+      onRecklessChange={ (v) => this.onChange(v, 'reckless') }
+      onLevelChange={ (v) => this.onChange(v, 'level') }
+      onGWMChange={ (v) => this.onChange(v, 'gwm') }
+      version={version} />;
   }
 
-  onChange({ target }, val) {
+  onChange(value, prop) {
     const nextState = this.state;
-    nextState[val] = target.type === 'checkbox' ? target.checked : target.value;
+    nextState[prop] = value;
     this.setState(nextState);
   }
 }

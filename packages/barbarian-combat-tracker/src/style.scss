@@ -1,0 +1,41 @@
+#root {
+  article {
+    border-left: 4px solid #9013FE;
+    padding: 8px;
+
+    > div {
+      margin-bottom: 12px;
+    }
+  }
+
+  input {
+    margin: 3px 3px 3px 0;
+  }
+
+  input[type=number] {
+    width: 36px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 16px;
+    padding-top: 4px;
+
+    > li {
+      font-family: 'Helvetica', sans-serif;
+      font-size: 14px;
+    }
+  }
+
+  strong {
+    color: #9013FE;
+  }
+
+  .disabled {
+    color: #ccc;
+  }
+
+  .version {
+    font-size: 10px;
+  }
+}

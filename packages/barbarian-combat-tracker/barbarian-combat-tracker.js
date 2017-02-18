@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,8 +79,8 @@ module.exports = React;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__attack__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__defense__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__checkbox__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__renderIf__ = __webpack_require__(7);
 
 
 
@@ -97,82 +97,247 @@ var proficiencyBonus = function proficiencyBonus(level) {
   } else return 2;
 };
 
+var rages = function rages(level) {
+  if (level === 20) {
+    return "Unlimited";
+  } else if (level >= 17) {
+    return 6;
+  } else if (level >= 12) {
+    return 5;
+  } else if (level >= 6) {
+    return 4;
+  } else if (level >= 3) {
+    return 3;
+  } else return 2;
+};
+
+var rageDamage = function rageDamage(level) {
+  if (level >= 16) {
+    return 4;
+  } else if (level >= 9) {
+    return 3;
+  } else return 2;
+};
+
+var brutalCritical = function brutalCritical(level) {
+  if (level >= 17) {
+    return 3;
+  } else if (level >= 13) {
+    return 2;
+  } else if (level >= 9) {
+    return 1;
+  } else return 0;
+};
+
 var App = function App(_ref) {
-  var model = _ref.model,
+  var _ref$model = _ref.model,
+      level = _ref$model.level,
+      raging = _ref$model.raging,
+      reckless = _ref$model.reckless,
+      gwm = _ref$model.gwm,
       onRageChange = _ref.onRageChange,
       onRecklessChange = _ref.onRecklessChange,
       onLevelChange = _ref.onLevelChange,
-      onGWMChange = _ref.onGWMChange;
+      onGWMChange = _ref.onGWMChange,
+      version = _ref.version;
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'article',
     null,
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
-      { className: 'options' },
+      null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
+        'label',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'label',
-          null,
-          'Level: ',
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
-            type: 'number',
-            min: '1',
-            max: '20',
-            value: model.level,
-            onChange: onLevelChange })
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'span',
-          null,
-          'Proficiency Bonus: +' + proficiencyBonus(model.level)
-        )
+        'Level: ',
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
+          type: 'number',
+          min: '1',
+          max: '20',
+          value: level,
+          onChange: function onChange(e) {
+            onLevelChange(Number(e.target.value));
+          } })
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
+        'ul',
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'label',
+          'li',
           null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
-            type: 'checkbox',
-            id: 'raging',
-            value: model.raging,
-            onChange: onRageChange
-          }),
-          'Raging'
+          'Proficiency Bonus: ',
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'strong',
+            null,
+            '+' + proficiencyBonus(level)
+          )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'label',
+          'li',
           null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
-            type: 'checkbox',
-            id: 'reckless',
-            value: model.reckless,
-            disabled: model.level === 1,
-            onChange: onRecklessChange
-          }),
-          'Reckless'
+          'Rages: ',
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'strong',
+            null,
+            rages(level)
+          )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'label',
-          null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
-            type: 'checkbox',
-            id: 'reckless',
-            value: model.gwm,
-            onChange: onGWMChange
-          }),
-          'Great Weapon Master'
+          __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
+          { condition: function condition() {
+              return level >= 5;
+            } },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'strong',
+              null,
+              '2'
+            ),
+            ' attacks'
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
+          { condition: function condition() {
+              return level >= 9;
+            } },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            'Brutal Critical: ' + brutalCritical(level) + ' extra weapon damage dice'
+          )
         )
       )
     ),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
-      { className: 'combat' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__attack__["a" /* default */], { model: model }),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__defense__["a" /* default */], { model: model })
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__checkbox__["a" /* default */], {
+        label: 'Raging',
+        disabled: false,
+        value: raging,
+        onChange: onRageChange }),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
+        { condition: function condition() {
+            return raging;
+          } },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'strong',
+              null,
+              '+' + rageDamage(level)
+            ),
+            ' damage'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            'Resistance to ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'strong',
+              null,
+              'bludgeoning, piercing & slashing'
+            ),
+            ' damage'
+          )
+        )
+      )
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__checkbox__["a" /* default */], {
+        label: 'Reckless',
+        disabled: level < 2,
+        value: reckless && level >= 2,
+        onChange: onRecklessChange }),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
+        { condition: function condition() {
+            return reckless && level >= 2;
+          } },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            'First Attack has ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'strong',
+              null,
+              'advantage'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            'Enemy has ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'strong',
+              null,
+              'advantage'
+            )
+          )
+        )
+      )
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__checkbox__["a" /* default */], {
+        label: 'Great Weapon Master',
+        disabled: false,
+        value: gwm,
+        onChange: onGWMChange }),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
+        { condition: function condition() {
+            return gwm;
+          } },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'strong',
+              null,
+              '-5'
+            ),
+            ' to hit'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'strong',
+              null,
+              '+10'
+            ),
+            ' damage'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            'On Critical, 1 melee weapon attack as a Bonus Action'
+          )
+        )
+      )
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'span',
+      { className: 'version' },
+      'v' + version
     )
   );
 };
@@ -186,17 +351,17 @@ var App = function App(_ref) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(7);
+var content = __webpack_require__(8);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(8)(content, {});
+var update = __webpack_require__(9)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!./../node_modules/css-loader/index.js!./style.css", function() {
-			var newContent = require("!!./../node_modules/css-loader/index.js!./style.css");
+		module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
+			var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/sass-loader/lib/loader.js!./style.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -209,10 +374,38 @@ if(false) {
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = ReactDOM;
+module.exports = {
+	"name": "barbarian-combat-tracker",
+	"version": "1.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "webpack"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"babel-cli": "^6.23.0",
+		"babel-core": "^6.23.1",
+		"babel-loader": "^6.3.2",
+		"babel-preset-es2015": "^6.22.0",
+		"babel-preset-react": "^6.23.0",
+		"css-loader": "^0.26.1",
+		"node-sass": "^4.5.0",
+		"sass-loader": "^6.0.1",
+		"style-loader": "^0.13.1",
+		"webpack": "^2.2.1"
+	}
+};
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+module.exports = ReactDOM;
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 /*
@@ -265,7 +458,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -273,23 +466,35 @@ module.exports = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
-var rageDamage = function rageDamage(level) {
-  if (level >= 16) {
-    return 4;
-  } else if (level >= 9) {
-    return 3;
-  } else return 2;
+var Checkbox = function Checkbox(_ref) {
+  var value = _ref.value,
+      _onChange = _ref.onChange,
+      disabled = _ref.disabled,
+      label = _ref.label;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'label',
+    { className: disabled ? 'disabled' : '' },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
+      type: 'checkbox',
+      value: value,
+      disabled: disabled,
+      onChange: function onChange(e) {
+        _onChange(e.target.checked);
+      } }),
+    label
+  );
 };
 
-var brutalCritical = function brutalCritical(level) {
-  if (level >= 17) {
-    return 3;
-  } else if (level >= 13) {
-    return 2;
-  } else if (level >= 9) {
-    return 1;
-  } else return 0;
-};
+/* harmony default export */ __webpack_exports__["a"] = Checkbox;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
 
 var RenderIf = function RenderIf(_ref) {
   var condition = _ref.condition,
@@ -301,207 +506,24 @@ var RenderIf = function RenderIf(_ref) {
   return null;
 };
 
-var Attack = function Attack(_ref2) {
-  var _ref2$model = _ref2.model,
-      raging = _ref2$model.raging,
-      reckless = _ref2$model.reckless,
-      level = _ref2$model.level,
-      gwm = _ref2$model.gwm;
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'section',
-    null,
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'h2',
-      null,
-      'Attacking'
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      RenderIf,
-      { condition: function condition() {
-          return level >= 5;
-        } },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'p',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'strong',
-          null,
-          '2'
-        ),
-        ' attacks'
-      )
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'h3',
-      null,
-      'Attack Roll'
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'ul',
-      null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        RenderIf,
-        { condition: function condition() {
-            return reckless;
-          } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'li',
-          null,
-          'Attack with ',
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'strong',
-            null,
-            'advantage'
-          )
-        )
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        RenderIf,
-        { condition: function condition() {
-            return gwm;
-          } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'li',
-          null,
-          '-5'
-        )
-      )
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'h3',
-      null,
-      'Damage Roll'
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'ul',
-      null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        RenderIf,
-        { condition: function condition() {
-            return raging;
-          } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'li',
-          null,
-          'Rage Damage: +' + rageDamage(level) + ' - melee weapons using Strength'
-        )
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        RenderIf,
-        { condition: function condition() {
-            return gwm;
-          } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'li',
-          null,
-          'Great Weapon Master Damage: +10'
-        )
-      )
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'h3',
-      null,
-      'Critical Hits'
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'ul',
-      null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        RenderIf,
-        { condition: function condition() {
-            return level >= 9;
-          } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'li',
-          null,
-          'Brutal Critical: ' + brutalCritical(level) + ' extra weapon damage dice'
-        )
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        RenderIf,
-        { condition: function condition() {
-            return gwm;
-          } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'li',
-          null,
-          'On critical hit with melee weapon, when reducing creature to 0HP: 1 melee weapon attack as bonus action'
-        )
-      )
-    )
-  );
-};
-
-/* harmony default export */ __webpack_exports__["a"] = Attack;
+/* harmony default export */ __webpack_exports__["a"] = RenderIf;
 
 /***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-
-
-var Defense = function Defense(_ref) {
-  var _ref$model = _ref.model,
-      raging = _ref$model.raging,
-      reckless = _ref$model.reckless,
-      level = _ref$model.level;
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'section',
-    null,
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'h2',
-      null,
-      'Defending'
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'ul',
-      null,
-      reckless ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'li',
-        null,
-        'Enemy has ',
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'strong',
-          null,
-          'advantage'
-        )
-      ) : null,
-      raging ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'li',
-        null,
-        'Resistance to ',
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'strong',
-          null,
-          'bludgeoning, piercing and slashing'
-        ),
-        ' damage'
-      ) : null
-    )
-  );
-};
-
-/* harmony default export */ __webpack_exports__["a"] = Defense;
-
-/***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)();
+exports = module.exports = __webpack_require__(5)();
 // imports
 
 
 // module
-exports.push([module.i, "body {\r\n  margin: 0;\r\n}\r\n\r\nul {\r\n  margin: 0;\r\n}\r\n\r\n.options {\r\n  font-family: 'Helvetica', sans-serif;\r\n  border-left: 4px solid #9013FE;\r\n  padding: 8px;\r\n}\r\n\r\n.options > div {\r\n  margin-bottom: 12px;\r\n}\r\n\r\nlabel {\r\n  margin-right: 12px;\r\n}\r\n\r\ninput[type=number] {\r\n  width: 36px;\r\n}\r\n\r\n.combat {\r\n  display: flex;\r\n}\r\n\r\n@media screen and (max-width: 399px) {\r\n  section {\r\n    width: 100%;\r\n    margin-bottom: 10px;\r\n  }\r\n}\r\n\r\n@media screen and (min-width: 400px) {\r\n  section {\r\n    flex: 1;\r\n    margin-left: 20px;\r\n  }\r\n}\r\n", ""]);
+exports.push([module.i, "#root article {\n  border-left: 4px solid #9013FE;\n  padding: 8px; }\n  #root article > div {\n    margin-bottom: 12px; }\n\n#root input {\n  margin: 3px 3px 3px 0; }\n\n#root input[type=number] {\n  width: 36px; }\n\n#root ul {\n  margin: 0;\n  padding-left: 16px;\n  padding-top: 4px; }\n  #root ul > li {\n    font-family: 'Helvetica', sans-serif;\n    font-size: 14px; }\n\n#root strong {\n  color: #9013FE; }\n\n#root .disabled {\n  color: #ccc; }\n\n#root .version {\n  font-size: 10px; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 /*
@@ -753,18 +775,20 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__style_css__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__style_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__style_scss__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__style_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__package_json__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__package_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__package_json__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -772,6 +796,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -803,26 +828,25 @@ var Container = function (_React$Component) {
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__app__["a" /* default */], {
         model: this.state,
-        onRageChange: function onRageChange(e) {
-          return _this2.onChange(e, 'raging');
+        onRageChange: function onRageChange(v) {
+          return _this2.onChange(v, 'raging');
         },
-        onRecklessChange: function onRecklessChange(e) {
-          return _this2.onChange(e, 'reckless');
+        onRecklessChange: function onRecklessChange(v) {
+          return _this2.onChange(v, 'reckless');
         },
-        onLevelChange: function onLevelChange(e) {
-          return _this2.onChange(e, 'level');
+        onLevelChange: function onLevelChange(v) {
+          return _this2.onChange(v, 'level');
         },
-        onGWMChange: function onGWMChange(e) {
-          return _this2.onChange(e, 'gwm');
-        } });
+        onGWMChange: function onGWMChange(v) {
+          return _this2.onChange(v, 'gwm');
+        },
+        version: __WEBPACK_IMPORTED_MODULE_4__package_json__["version"] });
     }
   }, {
     key: 'onChange',
-    value: function onChange(_ref, val) {
-      var target = _ref.target;
-
+    value: function onChange(value, prop) {
       var nextState = this.state;
-      nextState[val] = target.type === 'checkbox' ? target.checked : target.value;
+      nextState[prop] = value;
       this.setState(nextState);
     }
   }]);
