@@ -141,203 +141,220 @@ var App = function App(_ref) {
       onGWMChange = _ref.onGWMChange,
       version = _ref.version;
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'article',
+    'div',
     null,
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'div',
+      'section',
       null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'label',
+        'div',
         null,
-        'Level: ',
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
-          type: 'number',
-          min: '1',
-          max: '20',
-          value: level,
-          onChange: function onChange(e) {
-            onLevelChange(Number(e.target.value));
-          } })
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'label',
+          null,
+          'Level: ',
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
+            type: 'number',
+            min: '1',
+            max: '20',
+            value: level,
+            onChange: function onChange(e) {
+              onLevelChange(Number(e.target.value));
+            } })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            'Proficiency Bonus: ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'strong',
+              null,
+              '+' + proficiencyBonus(level)
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            'Rages: ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'strong',
+              null,
+              rages(level)
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
+            { condition: function condition() {
+                return level >= 5;
+              } },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                '2'
+              ),
+              ' attacks'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
+            { condition: function condition() {
+                return level >= 9;
+              } },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              'Brutal Critical: ' + brutalCritical(level) + ' extra weapon damage dice'
+            )
+          )
+        )
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'ul',
+        'div',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'li',
-          null,
-          'Proficiency Bonus: ',
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'strong',
-            null,
-            '+' + proficiencyBonus(level)
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'li',
-          null,
-          'Rages: ',
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'strong',
-            null,
-            rages(level)
-          )
-        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__checkbox__["a" /* default */], {
+          label: 'Raging',
+          disabled: false,
+          value: raging,
+          onChange: onRageChange }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
           { condition: function condition() {
-              return level >= 5;
+              return raging;
             } },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
+            'ul',
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'strong',
+              'li',
               null,
-              '2'
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                '+' + rageDamage(level)
+              ),
+              ' damage'
             ),
-            ' attacks'
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
-          { condition: function condition() {
-              return level >= 9;
-            } },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
-            'Brutal Critical: ' + brutalCritical(level) + ' extra weapon damage dice'
-          )
-        )
-      )
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'div',
-      null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__checkbox__["a" /* default */], {
-        label: 'Raging',
-        disabled: false,
-        value: raging,
-        onChange: onRageChange }),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
-        { condition: function condition() {
-            return raging;
-          } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'ul',
-          null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'strong',
+              'li',
               null,
-              '+' + rageDamage(level)
-            ),
-            ' damage'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
-            'Resistance to ',
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'strong',
-              null,
-              'bludgeoning, piercing & slashing'
-            ),
-            ' damage'
-          )
-        )
-      )
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'div',
-      null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__checkbox__["a" /* default */], {
-        label: 'Reckless',
-        disabled: level < 2,
-        value: reckless && level >= 2,
-        onChange: onRecklessChange }),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
-        { condition: function condition() {
-            return reckless && level >= 2;
-          } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'ul',
-          null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
-            'First Attack has ',
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'strong',
-              null,
-              'advantage'
+              'Resistance to ',
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                'bludgeoning, piercing & slashing'
+              ),
+              ' damage'
             )
-          ),
+          )
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__checkbox__["a" /* default */], {
+          label: 'Reckless',
+          disabled: level < 2,
+          value: reckless && level >= 2,
+          onChange: onRecklessChange }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
+          { condition: function condition() {
+              return reckless && level >= 2;
+            } },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
+            'ul',
             null,
-            'Enemy has ',
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'strong',
+              'li',
               null,
-              'advantage'
+              'First Attack has ',
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                'advantage'
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              'Enemy has ',
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                'advantage'
+              )
+            )
+          )
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__checkbox__["a" /* default */], {
+          label: 'Great Weapon Master',
+          disabled: false,
+          value: gwm,
+          onChange: onGWMChange }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
+          { condition: function condition() {
+              return gwm;
+            } },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'ul',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                '-5'
+              ),
+              ' to hit'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                '+10'
+              ),
+              ' damage'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              'On Critical, 1 melee weapon attack as a Bonus Action'
             )
           )
         )
       )
     ),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'div',
+      'footer',
       null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__checkbox__["a" /* default */], {
-        label: 'Great Weapon Master',
-        disabled: false,
-        value: gwm,
-        onChange: onGWMChange }),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_2__renderIf__["a" /* default */],
-        { condition: function condition() {
-            return gwm;
-          } },
+        'span',
+        { className: 'version' },
+        'v' + version
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'span',
+        { className: 'source' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'ul',
-          null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'strong',
-              null,
-              '-5'
-            ),
-            ' to hit'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'strong',
-              null,
-              '+10'
-            ),
-            ' damage'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
-            'On Critical, 1 melee weapon attack as a Bonus Action'
-          )
+          'a',
+          { href: 'https://github.com/sh1989/barbarian-combat-tracker' },
+          'Source'
         )
       )
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'span',
-      { className: 'version' },
-      'v' + version
     )
   );
 };
@@ -376,7 +393,7 @@ if(false) {
 
 module.exports = {
 	"name": "barbarian-combat-tracker",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -517,7 +534,7 @@ exports = module.exports = __webpack_require__(5)();
 
 
 // module
-exports.push([module.i, "#root article {\n  border-left: 4px solid #9013FE;\n  padding: 8px; }\n  #root article > div {\n    margin-bottom: 12px; }\n\n#root input {\n  margin: 3px 3px 3px 0; }\n\n#root input[type=number] {\n  width: 36px; }\n\n#root ul {\n  margin: 0;\n  padding-left: 16px;\n  padding-top: 4px; }\n  #root ul > li {\n    font-family: 'Helvetica', sans-serif;\n    font-size: 14px; }\n\n#root strong {\n  color: #9013FE; }\n\n#root .disabled {\n  color: #ccc; }\n\n#root .version {\n  font-size: 10px; }\n", ""]);
+exports.push([module.i, "#root section {\n  border-left: 4px solid #9013FE;\n  padding: 8px; }\n  #root section > div {\n    margin-bottom: 12px; }\n\n#root footer .version {\n  margin-right: 8px; }\n\n#root footer .version, #root footer .source {\n  font-size: 12px; }\n\n#root input {\n  margin: 3px 3px 3px 0; }\n\n#root input[type=number] {\n  width: 36px; }\n\n#root ul {\n  margin: 0;\n  padding-left: 16px;\n  padding-top: 4px; }\n  #root ul > li {\n    font-family: 'Helvetica', sans-serif;\n    font-size: 14px; }\n\n#root strong {\n  color: #9013FE; }\n\n#root .disabled {\n  color: #ccc; }\n", ""]);
 
 // exports
 

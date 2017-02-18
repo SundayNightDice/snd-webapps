@@ -36,67 +36,72 @@ const App = ({
   model: { level, raging, reckless, gwm },
   onRageChange, onRecklessChange, onLevelChange, onGWMChange,
   version }) => (
-    <article>
-      <div>
-        <label>Level: <input
-          type="number"
-          min="1"
-          max="20"
-          value={level}
-          onChange={e => {onLevelChange(Number(e.target.value))}} /></label>
-        <ul>
-          <li>Proficiency Bonus: <strong>{ `+${proficiencyBonus(level)}` }</strong></li>
-          <li>Rages: <strong>{ rages(level) }</strong></li>
-          <RenderIf condition={ () => level >= 5 }>
-              <li><strong>2</strong> attacks</li>
+    <div>
+      <section>
+        <div>
+          <label>Level: <input
+            type="number"
+            min="1"
+            max="20"
+            value={level}
+            onChange={e => {onLevelChange(Number(e.target.value))}} /></label>
+          <ul>
+            <li>Proficiency Bonus: <strong>{ `+${proficiencyBonus(level)}` }</strong></li>
+            <li>Rages: <strong>{ rages(level) }</strong></li>
+            <RenderIf condition={ () => level >= 5 }>
+                <li><strong>2</strong> attacks</li>
+            </RenderIf>
+            <RenderIf condition={ () => level >= 9  }>
+                <li>{ `Brutal Critical: ${brutalCritical(level)} extra weapon damage dice` }</li>
+            </RenderIf>
+          </ul>
+        </div>
+        <div>
+          <Checkbox
+            label="Raging"
+            disabled={false}
+            value={raging}
+            onChange={onRageChange} />
+          <RenderIf condition={() => raging }>
+            <ul>
+              <li><strong>{ `+${rageDamage(level)}` }</strong> damage</li>
+              <li>Resistance to <strong>bludgeoning, piercing & slashing</strong> damage</li>
+            </ul>
           </RenderIf>
-          <RenderIf condition={ () => level >= 9  }>
-              <li>{ `Brutal Critical: ${brutalCritical(level)} extra weapon damage dice` }</li>
+        </div>
+        <div>
+          <Checkbox
+            label="Reckless"
+            disabled={level < 2}
+            value={reckless && level >= 2}
+            onChange={onRecklessChange} />
+          <RenderIf condition={() => reckless && level >= 2 }>
+            <ul>
+              <li>First Attack has <strong>advantage</strong></li>
+              <li>Enemy has <strong>advantage</strong></li>
+            </ul>
           </RenderIf>
-        </ul>
-      </div>
-      <div>
-        <Checkbox
-          label="Raging"
-          disabled={false}
-          value={raging}
-          onChange={onRageChange} />
-        <RenderIf condition={() => raging }>
-          <ul>
-            <li><strong>{ `+${rageDamage(level)}` }</strong> damage</li>
-            <li>Resistance to <strong>bludgeoning, piercing & slashing</strong> damage</li>
-          </ul>
-        </RenderIf>
-      </div>
-      <div>
-        <Checkbox
-          label="Reckless"
-          disabled={level < 2}
-          value={reckless && level >= 2}
-          onChange={onRecklessChange} />
-        <RenderIf condition={() => reckless && level >= 2 }>
-          <ul>
-            <li>First Attack has <strong>advantage</strong></li>
-            <li>Enemy has <strong>advantage</strong></li>
-          </ul>
-        </RenderIf>
-      </div>
-      <div>
-        <Checkbox
-          label="Great Weapon Master"
-          disabled={false}
-          value={gwm}
-          onChange={onGWMChange} />
-        <RenderIf condition={ () => gwm }>
-          <ul>
-            <li><strong>-5</strong> to hit</li>
-            <li><strong>+10</strong> damage</li>
-            <li>On Critical, 1 melee weapon attack as a Bonus Action</li>
-          </ul>
-        </RenderIf>
-      </div>
-      <span className="version">{ `v${version}` }</span>
-    </article>
+        </div>
+        <div>
+          <Checkbox
+            label="Great Weapon Master"
+            disabled={false}
+            value={gwm}
+            onChange={onGWMChange} />
+          <RenderIf condition={ () => gwm }>
+            <ul>
+              <li><strong>-5</strong> to hit</li>
+              <li><strong>+10</strong> damage</li>
+              <li>On Critical, 1 melee weapon attack as a Bonus Action</li>
+            </ul>
+          </RenderIf>
+        </div>
+      </section>
+      <footer>
+        <span className="version">{ `v${version}` }</span>
+        <span className="source"><a href="https://github.com/sh1989/barbarian-combat-tracker">Source</a></span>
+      </footer>
+  </div>
   );
 
   export default App;
