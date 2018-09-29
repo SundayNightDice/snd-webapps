@@ -1,4 +1,6 @@
-export default [
+import { Invocation } from '../model'
+
+const invocations: Array<Invocation> = [
   { id: "1", name: "Agonizing Blast", eldritchBlast: true, effect: "+ CHA mod damage" },
   { id: "2", name: "Armor of Shadows" },
   { id: "3", name: "Ascendant Step", minLevel: 9 },
@@ -42,4 +44,6 @@ export default [
   { id: "41", name: "Relentless Hex", minLevel: 5, source: "XGTE" },
   { id: "42", name: "Tomb of Levistus", minLevel: 5, source: "XGTE" },
   { id: "43", name: "Trickster's Escape", minLevel: 7, source: "XGTE" }
-];
+]
+
+export default invocations

@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { render } from 'react-dom';
 import App from './app';
+import { Model } from './model';
 import './style.scss';
-import { version } from '../package.json';
 
-class Container extends React.Component {
-  constructor(props) {
+class Container extends React.Component<any, Model> {
+  constructor(props: any) {
     super(props);
     this.state = {
       level: 1,
@@ -22,14 +22,14 @@ class Container extends React.Component {
       onRageChange={ (v) => this.onChange(v, 'raging') }
       onRecklessChange={ (v) => this.onChange(v, 'reckless') }
       onLevelChange={ (v) => this.onChange(v, 'level') }
-      onGWMChange={ (v) => this.onChange(v, 'gwm') }
-      version={version} />;
+      onGWMChange={ (v) => this.onChange(v, 'gwm') } />;
   }
 
-  onChange(value, prop) {
-    const nextState = this.state;
-    nextState[prop] = value;
-    this.setState(nextState);
+  onChange(value: any, prop: string) {
+    this.setState({
+      ...this.state,
+      [prop]: value
+    });
   }
 }
 

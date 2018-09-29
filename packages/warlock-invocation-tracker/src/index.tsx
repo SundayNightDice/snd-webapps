@@ -1,12 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import { render } from 'react-dom';
 import App from './app';
+import { Model, ActiveInvocations } from './model'
 import invocations from './data/invocations';
 import './style.scss';
-import { version, repository } from '../package.json';
 
-class Container extends React.Component {
-  constructor(props) {
+class Container extends React.Component<any, Model> {
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -15,7 +15,7 @@ class Container extends React.Component {
       patron: null,
       eldritch: false,
       invocations: invocations,
-      activeInvocations: invocations.reduce((map, obj) => {
+      activeInvocations: invocations.reduce((map: ActiveInvocations, obj) => {
         map[obj.id] = false;
         return map;
       }, {})
@@ -31,18 +31,17 @@ class Container extends React.Component {
       onPatronChange={ (v) => this.onChange(v, 'patron') }
       onLevelChange={ (v) => this.onChange(v, 'level') }
       onEldritchChange={ (checked) => this.onChange(checked, 'eldritch') }
-      onActiveInvocationChange={this.onActiveInvocationChange}
-      version={version}
-      source={repository.url} />;
+      onActiveInvocationChange={this.onActiveInvocationChange} />;
   }
 
-  onChange(value, prop) {
-    const nextState = this.state;
-    nextState[prop] = value;
-    this.setState(nextState);
+  onChange(value: any, prop: string) {
+    this.setState({
+      ...this.state,
+      [prop]: value
+    });
   }
 
-  onActiveInvocationChange(id, checked) {
+  onActiveInvocationChange(id: string, checked: boolean) {
     const nextState = this.state;
     nextState.activeInvocations[id] = checked;
     this.setState(nextState);

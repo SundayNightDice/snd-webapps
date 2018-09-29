@@ -1,8 +1,9 @@
-import React from 'react';
+import * as React from 'react';
+import { Model } from './model'
 import Checkbox from './checkbox';
 import RenderIf from './renderIf';
 
-const proficiencyBonus = (level) => {
+const proficiencyBonus = (level: number) : number => {
   if (level >= 17) { return 6; }
   else if (level >= 13) { return 5; }
   else if (level >= 9) { return 4; }
@@ -10,7 +11,7 @@ const proficiencyBonus = (level) => {
   else return 2;
 };
 
-const rages = (level) => {
+const rages = (level: number) : string | number => {
   if (level === 20) { return "Unlimited"; }
   else if (level >= 17) { return 6; }
   else if (level >= 12) { return 5; }
@@ -19,23 +20,30 @@ const rages = (level) => {
   else return 2;
 };
 
-const rageDamage = (level) => {
+const rageDamage = (level: number) : number => {
   if (level >= 16) { return 4; }
   else if (level >= 9) { return 3; }
   else return 2;
 };
 
-const brutalCritical = (level) => {
+const brutalCritical = (level: number) : number => {
   if (level >= 17) { return 3; }
   else if (level >= 13) { return 2; }
   else if (level >= 9) { return 1; }
   else return 0;
 };
 
-const App = ({
+interface AppProps {
+  model: Model
+  onRageChange: (value: boolean) => void
+  onRecklessChange: (value: boolean) => void
+  onLevelChange: (value: number) => void
+  onGWMChange: (value: boolean) => void
+}
+
+const App: React.SFC<AppProps> = ({
   model: { level, raging, reckless, gwm },
-  onRageChange, onRecklessChange, onLevelChange, onGWMChange,
-  version }) => (
+  onRageChange, onRecklessChange, onLevelChange, onGWMChange }) => (
     <div>
       <section>
         <div>
@@ -97,10 +105,6 @@ const App = ({
           </RenderIf>
         </div>
       </section>
-      <footer>
-        <span className="version">{ `v${version}` }</span>
-        <span className="source"><a href="https://github.com/sh1989/barbarian-combat-tracker">Source</a></span>
-      </footer>
   </div>
   );
 

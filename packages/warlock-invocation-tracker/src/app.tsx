@@ -1,24 +1,33 @@
-import React from 'react';
-import EldritchBlast from './eldritchBlast';
-import Invocations from './invocations';
-import LevelSelector from './levelSelector';
-import PactWeapon from './pactWeapon';
-import RenderIf from './renderIf';
-import patrons from './data/patrons';
-import pacts from './data/pacts';
+import * as React from 'react'
+import EldritchBlast from './eldritchBlast'
+import Invocations from './invocations'
+import LevelSelector from './levelSelector'
+import PactWeapon from './pactWeapon'
+import RenderIf from './renderIf'
+import { Model } from './model'
+import patrons from './data/patrons'
+import pacts from './data/pacts'
 
-const proficiencyBonus = (level) => {
-  if (level >= 17) { return 6; }
-  else if (level >= 13) { return 5; }
-  else if (level >= 9) { return 4; }
-  else if (level >= 5) { return 3; }
-  else return 2;
+const proficiencyBonus = (level: number) : number => {
+  if (level >= 17) { return 6 }
+  else if (level >= 13) { return 5 }
+  else if (level >= 9) { return 4 }
+  else if (level >= 5) { return 3 }
+  else return 2
 };
 
-const App = ({
+interface AppProps {
+  model: Model
+  onActiveInvocationChange: (id: string, checked: boolean) => void
+  onEldritchChange: (value: boolean) => void
+  onPatronChange: (value: string) => void
+  onPactChange: (value: string) => void
+  onLevelChange: (value: number) => void
+}
+
+const App: React.SFC<AppProps> = ({
   model: { activeInvocations, eldritch, invocations, level, patron, pact },
-  onActiveInvocationChange, onEldritchChange, onPatronChange, onPactChange, onLevelChange,
-  version, source }) => (
+  onActiveInvocationChange, onEldritchChange, onPatronChange, onPactChange, onLevelChange }) => (
     <div>
       <section>
         <div>
@@ -55,7 +64,7 @@ const App = ({
             activeInvocations={activeInvocations}
             level={level}
             onChange={onEldritchChange} />
-          <RenderIf condition={() => pact === 'blade'}>
+          <RenderIf condition={() => pact && pact.value === 'blade'}>
             <PactWeapon
               className="warlock-option"
               invocations={invocations}
@@ -71,11 +80,7 @@ const App = ({
           patron={patron}
           onChange={onActiveInvocationChange} />
       </section>
-      <footer>
-        <span className="version">{ `v${version}` }</span>
-        <span className="source"><a href={source}>Source</a></span>
-      </footer>
   </div>
-  );
+  )
 
-  export default App;
+  export default App
